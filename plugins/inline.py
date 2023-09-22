@@ -42,6 +42,8 @@ async def answer(bot, query):
         results.append(
             InlineQueryResultCachedDocument(
                 caption=file.caption or "",
+                title=file.file_name,
+                document_file_id=file.file_id,
                 description=f'Size: {size_formatter(file.file_size)}\nType: {file.file_type}',
                 reply_markup=reply_markup
             )
