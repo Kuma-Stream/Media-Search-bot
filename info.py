@@ -29,12 +29,5 @@ DATABASE_NAME = environ['DATABASE_NAME']
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Messages
-default_start_msg = """
-**Hi, I'm Chise**
-
-Here you can search files in inline mode. Just press following buttons and start searching.
-"""
-
-START_MSG = environ.get('START_MSG', default_start_msg)
 SHARE_BUTTON_TEXT = 'Checkout {username} for searching files'
 INVITE_MSG = environ.get('INVITE_MSG', 'Please join @ongoingpmid to use this bot')
