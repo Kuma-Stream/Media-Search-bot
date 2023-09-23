@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQue
 from utils import get_search_results
 from info import CACHE_TIME, SHARE_BUTTON_TEXT, AUTH_USERS, AUTH_CHANNEL
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(name)
 cache_time = 0 if AUTH_USERS or AUTH_CHANNEL else CACHE_TIME
 
 
@@ -39,16 +39,15 @@ async def answer(bot, query):
     files, next_offset = await get_search_results(text, file_type=file_type, max_results=10, offset=offset)
 
     for file in files:
-    caption = file.caption or ""  # Mengambil caption file, atau kosong jika tidak ada
-    results.append(
-        InlineQueryResultCachedDocument(
-            title=file.file_name,
-            document_file_id=file.file_id,
-            caption=caption,  # Menambahkan caption ke inline query result
-            description=f'Size: {size_formatter(file.file_size)}\nType: {file.file_type}',
-            reply_markup=reply_markup
+        results.append(
+            InlineQueryResultCachedDocument(
+                title=file.file_name,
+                document_file_id=file.file_id,
+                caption=file.caption or "",
+                description=f'Size: {size_formatter(file.file_size)}\nType: {file.file_type}',
+                reply_markup=reply_markup
+            )
         )
-    )
 
     if results:
         switch_pm_text = f"{emoji.FILE_FOLDER} Results"
